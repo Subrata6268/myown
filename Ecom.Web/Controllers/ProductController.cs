@@ -65,7 +65,11 @@ namespace Ecom.Web.Controllers
             res.deleteproduct(id);
             return RedirectToAction("Getallproduct");
         }
-        
-        
+        public ActionResult Deleteid(int id)
+        {
+
+            return View();
+        }
+
     }
 }
