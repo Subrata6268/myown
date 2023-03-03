@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Ecom.Models.Productmodel>
+
+@{
+    ViewBag.Title = "Getallproduct";
+}
+
+<div>
+    <form method="post" action="/Product/">
+        <input type="text" name="" value="" id="searchtxt" />
+        <button type="button" id="searchbtn">Search</button>
+        <button type="button">Search</button>
+    </form>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Saveproduct")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+  
+<script>
+    $("#searchbtn").click(function () {
+       var values= $("#searchtxt").val();
+        $.ajax({
+            url: "/Product/Getallproduct",
+            data: {
+                search: values
+            }
+        })
+            .done(function (response) {
+                $("#table").html(response);
+            })
+           
+    });
+</script>
